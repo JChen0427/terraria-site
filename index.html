@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Terraria</title>
+    <style>
+    html,
+        body {
+            margin: 0;
+            min-height: 100%;
+        }
+        body {
+            margin: 0;
+            background-color: #10152c;
+        }
+        .page {
+            width: 1512px;
+            height: 3500px;
+            margin: 0 auto;
+            background-image: url(main_background.png);
+            background-position: top left;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            position: relative;
+        }
+        .content-panel {
+            position: absolute;
+            top: 89px;
+            left: 75px;
+            width: 1363px;
+            height: 3313px;
+            box-sizing: border-box;
+            border: 3px solid #0051AD;
+            background: rgba(36, 41, 45, 0.65);
+            display: grid;
+            grid-template-rows: 700fr 900fr 1000fr 900fr;
+        }
+        .content-section {
+            box-sizing: border-box;
+            border: none;
+        }
+        .title-logo {
+            position: absolute;
+            left: 278px;
+            top: 232px;
+            width: 956px;
+            height: 280px;
+        }
+        .tagline {
+            position: absolute;
+            top: 551px;
+            left: 0;
+            width: 1512px;
+            margin: 0;
+            color: #F6E6B4;
+            font-family: "Pixelify Sans", sans-serif;
+            font-size: 48px;
+            font-weight: 400;
+            line-height: normal;
+            text-align: center;
+            text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+        }
+        .scroll-prompt {
+            position: absolute;
+            top: 621px;
+            left: 487px;
+            width: 538px;
+            height: 91px;
+            display: grid;
+            grid-template-columns: 91px 1fr 91px;
+            align-items: center;
+            text-align: center;
+        }
+        .sunflower {
+            width: 91px;
+            height: 91px;
+        }       
+        .scroll-prompt p {
+            margin: 0;
+            color: #F6E6B4;
+            font-family: "Pixelify Sans", sans-serif;
+            font-size: 32px;
+            line-height: normal;
+            text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+        }
+        .bubble-divider {
+            position: absolute;
+            top: 780px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1050px;
+            height: auto;
+        }
+        .welcome-title {
+            position: absolute;
+            top: 864px;
+            left: 185px;
+            margin: 0;
+            color: #F6E6B4;
+            font-family: "Pixelify Sans", sans-serif;
+            font-size: 60px;
+            font-weight: 400;
+            line-height: normal;
+            text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+            white-space: nowrap;
+        }
+        .surface-description {
+            position: absolute;
+            top: 960px;
+            left: 185px;
+            width: 600px;
+            margin: 0;
+            color: #F2F2F2;
+            font-family: "Pixelify Sans", sans-serif;
+            font-size: 42px;
+            font-weight: 400;
+            line-height: normal;
+            text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+        }
+        .surface-image {
+            position: absolute;
+            top: 861px;
+            left: 824px;
+            width: 512px;
+            height: 512px;
+            box-sizing: border-box;
+            border: 3px solid rgba(0, 26, 128, 0.75);
+            object-fit: cover;
+        }
+        .surface-ground {
+            position: absolute;
+            top: 700px;
+            left: 0;
+            width: 100%;
+            height: 900px;
+            z-index: 2;
+        }
+        .surface-thorns {
+            position: absolute;
+            left: 50%;
+            bottom: 67px;
+            transform: translateX(-50%);
+            width: 1116px;
+            height: 37px;
+        }
+        .surface-duck {
+            position: absolute;
+            right: 379px;
+            bottom: 100px;
+            width: 74px;
+            height: 83px;
+        }
+        .surface-merchant {
+            position: absolute;
+            right: 273px;
+            bottom: 102px;
+            width: 96px;
+            height: 116px;
+        }
+        .underground-title {
+            position: absolute;
+            top: 1571px;
+            left: 185px;
+            width: auto;
+            text-align: left;
+            margin: 0;
+            color: #F6E6B4;
+            font-family: "Pixelify Sans", sans-serif;
+            font-size: 60px;
+            font-weight: 400;
+            text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+        }
+        .npc-carousel {
+            position: absolute;
+            left: 165px;
+            top: 1600px;
+            width: 434px;
+            z-index: 3;
+        }
+        .underground-description {
+            position: absolute;
+            left: 735px;
+            top: 1600px;
+            width: 550px;
+            margin: 0;
+            color: #F2F2F2;
+            font-family: "Pixelify Sans", sans-serif;
+            font-size: 44px;
+            font-weight: 400;
+            line-height: normal;
+        }
+        .underground-links {
+            position: absolute;
+            top: 2070px;
+            left: 0;
+            width: 1512px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 68px;
+            transform: translateX(-100px);
+        }
+        .category-row {
+            display: flex;
+            justify-content: center;
+            gap: 131px;
+        }
+        .category-button {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+            width: 280px;
+            height: 99px;
+            padding: 21px 16px 20px;
+            background: #1A349E;
+            color: #FFFFFF;
+            font-family: "Pixelify Sans", sans-serif;
+            font-size: 48px;
+            font-weight: 400;
+            line-height: normal;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        .category-button {
+            transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .category-button:hover {
+            background-color: #2D4FC5;
+            transform: translateY(-6px);
+            box-shadow: 0 6px 0 #101F63;
+        }
+        .carousel-image {
+            display: block;
+            width: 100%;
+            height: 380px;
+            object-fit: contain;
+            image-rendering: pixelated;
+        }
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            width: 34px;
+            height: 44px;
+            padding: 0;
+            border: none;
+            background: transparent;
+            color: white;
+            font-family: Arial, sans-serif;
+            font-size: 42px;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+        .carousel-arrow.previous {
+            left: -63px;
+        }
+        .carousel-arrow.next {
+            right: -63px;
+        }
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 14px;
+        }
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            padding: 0;
+            border: none;
+            border-radius: 50%;
+            background: #CFCFCF;
+            cursor: pointer;
+        }
+        .carousel-dot.active {
+            background: #F6E6B4;
+        }
+        .underground-chain {
+            position: absolute;
+            left: 151px;
+            top: 2385px;
+            width: 1008px;
+            height: 63px;
+        }
+        .underworld-title {
+            width: 834px;
+            height: 72px;
+            margin: 0;
+            color: #F0E6B4;
+            font-family: "Pixelify Sans", sans-serif;
+            font-size: 60px;
+            font-weight: 400;
+            line-height: normal;
+            position: absolute;
+            left: 210px;
+            top: 2550px;
+        }
+        .world-description {
+            position: absolute;
+            left: 140px;
+            top: 2650px;
+            width: 1250px;
+            margin: 0;
+            color: #F2F2F2;
+            font-family: "Pixelify Sans", sans-serif;
+            font-size: 42px;
+            font-weight: 400;
+            line-height: normal;
+        }
+        .awards-heading {
+        position: absolute;
+        left: 210px;
+        top: 3050px;
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        }
+        .awards-heading h2 {
+            margin: 0;
+            color: #F6E6B4;
+            font-family: "Pixelify Sans", sans-serif;
+            font-size: 58px;
+            font-weight: 400;
+            line-height: normal;
+            white-space: nowrap;
+        }
+        .awards-heading img {
+            width: 172px;
+            height: 110px;
+            object-fit: contain;
+        }
+        .awards-list {
+            position: absolute;
+            left: 137px;
+            top: 3165px;
+            display: flex;
+            align-items: center;
+            gap: 55px;
+        }
+        .award-card {
+            width: fit-content;
+            height: 68px;
+            box-sizing: border-box;
+            padding: 0 12px;
+            display: flex;
+            align-items: center;
+            background-color: #5E0000;
+            color: #FBCA29;
+            font-family: "Pixelify Sans", sans-serif;
+            font-size: 36px;
+            font-weight: 400;
+            white-space: nowrap;
+        }
+        .terraria-links {
+            position: absolute;
+            top: 3300px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: "Pixelify Sans", sans-serif;
+            font-size: 36px;
+            white-space: nowrap;
+        }
+        .terraria-links a {
+            color: #0084FF;
+            text-decoration: underline;
+        }
+        .terraria-home-icon {
+            width: 49px;
+            height: 53px;
+            object-fit: contain;
+        }
+        body,
+            body * {
+                cursor: url("Copper_Pickaxe.png") 2 2, auto;
+        }
+        a,
+        button {
+        cursor: url("Copper_Pickaxe.png") 2 2, pointer;
+        }
+        .cursor-spark {
+            position: fixed;
+            width: 6px;
+            height: 6px;
+            pointer-events: none;
+            z-index: 99999;
+            animation: spark-fade 450ms steps(4, end) forwards;
+        }
+
+        @keyframes spark-fade {
+            from {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            to {
+                opacity: 0;
+                transform: translate(
+                    calc(-50% + var(--move-x)),
+                    calc(-50% + var(--move-y))
+                ) scale(0.1);
+            }
+        }
+    </style>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" rel="stylesheet">
+    </head>
+    
+    <body>
+    <main class="page">
+        <div class="content-panel">
+            <section class="content-section sky" id="sky">
+            </section>
+            <section class="content-section surface" id="surface">
+            </section>
+            <section class="content-section underground" id="underground">
+                <div class="npc-carousel">
+                    <button class="carousel-arrow previous" type="button" aria-label="上一张">‹</button>
+                    <img
+                         class="carousel-image"
+                         src="image02.png"
+                         alt="Terraria NPCs"
+                         >
+                    <button class="carousel-arrow next" type="button" aria-label="下一张">›</button>
+                    <div class="carousel-dots">
+                        <button class="carousel-dot active" type="button" aria-label="1"></button>
+                        <button class="carousel-dot" type="button" aria-label="2"></button>
+                        <button class="carousel-dot" type="button" aria-label="3"></button>
+                </div>
+            </div>
+                <p class="underground-description">
+                    Terraria is filled with helpful NPCs, dangerous enemies, valuable ores,
+                    hidden treasures, and mysterious structures. Explore each category to
+                    discover more.
+                </p>
+                <div class="underground-links">
+                    <div class="category-row">
+                        <a class="category-button" href="https://terraria.wiki.gg/wiki/World_generation" target="_blank" rel="noopener noreferrer">Structures</a>
+                        <a class="category-button" href="https://terraria.wiki.gg/wiki/Ores" target="_blank" rel="noopener noreferrer">Ores</a>
+                    </div>
+                    <div class="category-row">
+                        <a class="category-button" href="https://terraria.wiki.gg/wiki/NPCs" target="_blank" rel="noopener noreferrer">NPCs</a>
+                        <a class="category-button" href="https://terraria.wiki.gg/wiki/Enemies" target="_blank" rel="noopener noreferrer">Enemies</a>
+                        <a class="category-button" href="https://terraria.wiki.gg/wiki/Chests" target="_blank" rel="noopener noreferrer">Treasures</a>
+                </div>
+                    </div>
+<img src="chain.gif" class="underground-chain" alt="">
+</section>
+</div>
+                
+            </section>
+            <section class="content-section underworld" id="underworld">
+                <h2 class="underworld-title">Behind the World of Terraria</h2>
+                <p class="world-description">
+                    Terraria was created by Andrew “Redigit” Spinks and developed by the independent game studio Re-Logic. First released on May 16, 2011, the game continued to grow through years of updates and support from its community. Whitney “Cenx” Spinks contributed as executive producer and designer, while Scott Lloyd Shelly composed the game’s music.
+                </p>
+                <div class="awards-heading">
+                    <h2>Awards &amp; Recognition</h2>
+                    <img src="Red_Devil.gif" alt="">
+                </div>
+                <div class="awards-list">
+                    <div class="award-card">2011 – IndieDB Indie of the Year</div>
+                    <div class="award-card">2021 – Steam Awards: Labor of Love</div>
+                </div>
+                <div class="terraria-links">
+                    <img src="Housing_menu_(on).png" alt="" class="terraria-home-icon">
+
+                    <a href="https://terraria.org/" target="_blank" rel="noopener noreferrer">
+                        Official Terraria Website
+                    </a>
+                    <span>·</span>
+                    <a href="https://terraria.wiki.gg/wiki/Terraria_Wiki"
+                    target="_blank" rel="noopener noreferrer">
+                    Terraria Wiki
+                </a>
+                </div>
+            </section>
+        </div>
+        <img class="title-logo" src="Terraria_Title.png" alt="Terraria">
+        <p class="tagline">Explore, Build, Fight, and Discover</p>
+        <div class="scroll-prompt">
+        <img src="sunflower.gif" alt="" class="sunflower">
+        <p>Scroll to Explore!</p>
+        <img src="sunflower.gif" alt="" class="sunflower">
+        </div>
+        <img src="bubbles.png" alt="" class="bubble-divider">
+        <h2 class="welcome-title">Welcome to Terraria</h2>
+        <p class="surface-description">
+        Terraria is a 2D sandbox adventure game where players can explore, build, fight, and collect resources. Each world is randomly generated, making every adventure different. The Surface is where the player's journey begins.
+        </p>
+        <img
+        src="image01.jpeg"
+        alt="Terraria gameplay"
+        class="surface-image"
+        >
+        <div class="surface-ground">
+        <img src="thorns.png" alt="" class="surface-thorns">
+        <img src="Mallard_Duck.gif" alt="Mallard duck" class="surface-duck">
+        <img src="Merchant_Walk.gif" alt="Terraria merchant" class="surface-merchant">
+        </div>
+        <h2 class="underground-title">Meet, Fight, Mine, and Discover</h2>
+    </main>
+        <script>
+            const slides = [
+                { src: "image02.png", alt: "Terraria NPCs" },
+                { src: "image03.jpg", alt: "Terraria image 3" },
+                { src: "image04.jpg", alt: "Terraria image 4" }
+            ];
+            const image = document.querySelector(".carousel-image");
+            const dots = document.querySelectorAll(".carousel-dot");
+            let currentSlide = 0;
+            function showSlide(index) {
+                currentSlide = (index + slides.length) % slides.length;
+                image.src = slides[currentSlide].src;
+                image.alt = slides[currentSlide].alt;
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle("active", i === currentSlide);
+                });
+            }
+            document.querySelector(".previous").addEventListener("click", () => {
+                showSlide(currentSlide - 1);
+            });
+            document.querySelector(".next").addEventListener("click", () => {
+                showSlide(currentSlide + 1);
+            });
+            dots.forEach((dot, index) => {
+                dot.addEventListener("click", () => {
+                    showSlide(index);
+                });
+            });
+</script>
+<script>
+  let lastSparkTime = 0;
+
+  document.addEventListener("pointermove", function (event) {
+    const now = Date.now();
+    if (now - lastSparkTime < 45) return;
+    lastSparkTime = now;
+
+    const spark = document.createElement("span");
+    spark.className = "cursor-spark";
+
+    spark.style.left = event.clientX + "px";
+    spark.style.top = event.clientY + "px";
+
+    const colors = ["#FFB52E", "#FF6A00", "#FFF2A6"];
+    spark.style.backgroundColor =
+      colors[Math.floor(Math.random() * colors.length)];
+
+    spark.style.setProperty(
+      "--move-x",
+      Math.random() * 30 - 15 + "px"
+    );
+    spark.style.setProperty(
+      "--move-y",
+      Math.random() * 30 - 15 + "px"
+    );
+
+    document.body.appendChild(spark);
+
+    spark.addEventListener("animationend", function () {
+      spark.remove();
+    }, { once: true });
+  });
+</script>
+    </body>
+</html>
